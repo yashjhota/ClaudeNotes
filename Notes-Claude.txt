@@ -1,0 +1,171 @@
+Free Usuage of Claude using various Models
+
+ollama - Cloud Models Limited Usuage
+       - Free Models download and Use
+           cmd - ollama pull <model name>
+
+1 Slash commands - 
+   claude -r - past convesation
+   /resume - to resume past conversation
+   One session - one task - one feature
+   /rename - the session immedialtely
+   /btw - for quick question answer
+   /export - Export session if needed full conversation 
+   /model - to select the model
+   /Usuage - plan
+   /stats - usage behaviour
+   /insights - detailed report 
+   /config - change the config of claude
+   /permissions - tools u allow always no need to ask
+   /voice - mode
+
+2 Context window Management -
+      - Model's working Memory
+      - context - all the info avaialbel to understand something
+      - Each new session has fresh context window of 200k tokens claude ka opus
+      - Tokens are consumed by both input and output
+      - claude ka outpout hotha hai 6x se jada
+      - original 150k tokens rest occupied by other cache /context to see
+      - /compact - summarize all conversation and store in cahche
+      - autocompact happens anytimes by claude 
+      - /clear - delte conversation or start new session
+      - use .claudeignore - to ignore it into context
+
+3 ClAUDE.md - 
+        - why ?  - llm'd dont have Memory , need to repeat instruction across session ,
+        repeating instruction is cumbersome , error prone and leads to inconsistent code generation.
+        - Project level instruction file , guide claude to how behave while working on your codebase , like a 
+        system prompt your Project which include like 
+            - how project is structured
+            - coding conventions
+            - how to run/build/test
+            - what tools to use
+        - how to make it - manually or /init if working on other projects
+         /init - shows 30% rest 70% you have to tell ambually - workflows,cosntatints,what to avoid,dep traget
+         ,naming convention , etc
+    
+    .claude Folder - local config dirc for specific or all project (project level / global level home dirc)
+        - settings.json
+        - settings.local.json - not shared
+        commands folder- custom commands
+        skills folder - how to do things , loaded when needed
+        agents folder - subagents
+    
+    Types  - .CLAUDE.local.md - personal workflows 
+
+        Not more than 200 lines
+        use @imports for external documents
+
+    Auto Memory - Memory.md - it lives in home dire - .claude/projects/project1/memory/
+    It loads only top 200 lines in every session /memory - u can manage and edit 
+    Based on whatevery update your memory files for ex we use inr to usd
+
+4 SPEC DRIVEN DEVELOPEMENT
+         - PS 
+         - FR 
+         - API Contracts 
+         - Constraints
+         - Ege cases and erro handling
+         - Acceptance crirtera
+
+    In every spec document you get these feature or make it.
+
+    Spec -> Review -> Design -> Review -> Task -> Build -> Validate
+    SPEC - high level overiview - why and what
+    Design - how 
+
+5 Plan Mode / Ultra Plan Mode
+
+            - /plan - from .claude/specs/01.md - 
+
+6 Custom Slash commands
+
+    - .claude/commands/ 
+    - like /reviev , /test, /scan,/test
+    - create md file with the name of u want in claude with slash
+
+7 Claude code skills
+
+            - which problem solved ? - detailed prompt? - 
+            - answer :
+                    - resuable , file basedd resource , how to work and it load automatically needed    
+                    - just in time knowledge
+                    SKILL.md file 
+                            - name
+                            - description
+
+                            - instruction , code patterns, steps , reference 
+
+                            optional resources - scripts/ , resources/,assests/
+            - create manually 
+            - use /create-skills
+            - install from  marketplace
+
+8 ClAUDE  sub agents
+
+
+            - run in own isolated context window
+            - without subagents we resend enitre codebase , so waste of usuage , loss of memory
+        
+        Why use?
+                - context isolation
+                - specialzed subagent - research , code wala , u can design by own
+                - Modularity - just like function in code
+                - Paralleslism 
+        Tp use case
+
+                - codebase exploration
+                - code Review
+                - verfication & Validation
+                - Mulit stage pipeline
+                - Parallel Independent tasks
+                - Security audit
+        
+        How to trigger
+
+            -implicit
+            -explicit
+
+        Types
+
+            - Built in - explore , plan , General-Purpose
+            - custom - userlevel, global 
+                    .claude/agents 
+                        conifg - tools , prompts , model , permissions , hooks , skills
+        
+
+        To see which subagent trigger 
+
+        -> install and use agent observe
+
+9 How to create 
+
+            .md file - name ,description, tools ,model
+            main body
+
+10 Claude + MCP 
+
+            - open standard created by anthropic that acts as connector b/w claude and other external tools ,service an ddata source
+            - key idea to provide claude code with more tools
+        
+    Db MCp - claude mcp add --transport stdio sqlite --npx -y @executeableautomation/database-server filelocation 
+
+    ### QLite MCP Server
+
+Link - https://github.com/executeautomation/mcp-database-server
+
+`claude mcp add --transport stdio sqlite -- npx -y @executeautomation/database-server /Users/nitish/Desktop/expense-tracker/spendly.db`
+
+Examples
+
+- List all tables in the Spendly database
+- Describe the schema of the expenses table
+- Show total spending grouped by category
+
+
+            other server - context7 - updated documentation 
+                          - jira
+                          - Notion
+                          - slack
+                
+                claude mcp remove <mcpname>

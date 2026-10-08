@@ -1,0 +1,2 @@
+ollama - ollama launch claude
+fcc - fcc-claude
